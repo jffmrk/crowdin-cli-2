@@ -391,9 +391,9 @@ public class CommandUtils extends BaseCli {
                 }
             }
 
-            // BUGFIX -- the downloaded files do not contain the locale prefix, need to remove it.
-            preservedKey = preservedKey.substring(preservedKey.lastIndexOf(Utils.PATH_SEPARATOR));
-
+//            // BUGFIX -- the downloaded files do not contain the locale prefix, need to remove it.
+//            preservedKey = preservedKey.substring(preservedKey.lastIndexOf(Utils.PATH_SEPARATOR));
+//
             String key = baseTempDir + Utils.PATH_SEPARATOR + preservedKey;
             key = key.replaceAll(Utils.PATH_SEPARATOR_REGEX + "+", Utils.PATH_SEPARATOR_REGEX);
             String value = propertiesBean.getBasePath() + Utils.PATH_SEPARATOR + entry.getValue();
@@ -409,6 +409,7 @@ public class CommandUtils extends BaseCli {
                 File newFile = new File(value);
                 if (oldFile.isFile()) {
                     newFile.getParentFile().mkdirs();
+                    System.out.println("RENAME: \n  " + oldFile.getAbsolutePath() + "\n  -->\n  " + newFile.getAbsolutePath());
                     if(!oldFile.renameTo(newFile)) {
                         if (newFile.delete()) {
                             if(!oldFile.renameTo(newFile)) {
